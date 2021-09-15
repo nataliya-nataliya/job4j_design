@@ -4,7 +4,7 @@ public class SimpleStack<T> {
 
     private ForwardLinked<T> linked = new ForwardLinked<T>();
 
-    public T pop() { // Метод pop() - должен возвращать значение и удалять его из коллекции
+    public T pop() {
         return linked.deleteFirst();
     }
 
