@@ -49,3 +49,6 @@ group by type.name
 having count(*) < 10;
 
 select p.name, type.name from product p join type on type.id = p.type_id;
+
+select * from product;
+
