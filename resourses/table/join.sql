@@ -32,44 +32,30 @@ select * from departments cross join employees;
 select d.name from departments d left join employees e on e.department_id = d.id
 where e.department_id is null;
 
-select * from departments d left join employees e on e.department_id = d.id;
-select * from employees e right join departments d on e.department_id = d.id;
+select  d.id, d.name, e.department_id, e.id, e.name from departments d left join employees e on e.department_id = d.id;
+select  d.id, d.name, e.department_id, e.id, e.name from employees e right join departments d on e.department_id = d.id;
 
-select * from employees e left join departments d on e.department_id = d.id;
-select * from departments d right join employees e on e.department_id = d.id;
-
-
+select d.id, d.name, e.department_id, e.id, e.name from employees e left join departments d on e.department_id = d.id;
+select  d.id, d.name, e.department_id, e.id, e.name from departments d right join employees e on e.department_id = d.id;
 
 
-create table teens1 (
+
+
+create table teens (
 	int serial primary key,
 	name varchar(50),
 	gender varchar(8)
 );
 
-create table teens2 (
-	int serial primary key,
-	name varchar(50),
-	gender varchar(8)
-);
+insert into teens (name, gender) values ('Marcelle', 'Male');
+insert into teens (name, gender) values ('Christie', 'Female');
+insert into teens (name, gender) values ('John', 'Male');
+insert into teens (name, gender) values ('Anna', 'Female');
+insert into teens (name, gender) values ('Aurelea', 'Female');
+insert into teens (name, gender) values ('Petr', 'Male');
+insert into teens (name, gender) values ('Fred', 'Male');
 
-insert into teens1 (name, gender) values ('Marcelle', 'Male');
-insert into teens1 (name, gender) values ('Christie', 'Female');
-insert into teens1 (name, gender) values ('John', 'Male');
-insert into teens1 (name, gender) values ('Anna', 'Female');
-insert into teens1 (name, gender) values ('Aurelea', 'Female');
-insert into teens1 (name, gender) values ('Petr', 'Male');
-insert into teens1 (name, gender) values ('Fred', 'Male');
-
-insert into teens2 (name, gender) values ('Marcelle', 'Male');
-insert into teens2 (name, gender) values ('Christie', 'Female');
-insert into teens2 (name, gender) values ('John', 'Male');
-insert into teens2 (name, gender) values ('Anna', 'Female');
-insert into teens2 (name, gender) values ('Aurelea', 'Female');
-insert into teens2 (name, gender) values ('Petr', 'Male');
-insert into teens2 (name, gender) values ('Fred', 'Male');
-
-select * from teens1 cross join teens2
-where teens1.gender != teens2.gender;
+select t1.name, t2.name from teens t1 cross join teens t2
+where t1.gender != t2.gender;
 
 
