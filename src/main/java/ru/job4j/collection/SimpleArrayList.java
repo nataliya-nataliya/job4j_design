@@ -15,37 +15,44 @@ public class SimpleArrayList<T> implements List<T> {
         this.container = (T[]) new Object[capacity];
     }
 
+    public void validation(int index) {
+        Objects.checkIndex(index, size);
+    }
+
     @Override
     public void add(T value) {
         if (size == container.length) {
-            container = Arrays.copyOf(container, container.length * 2);
+            grow();
         }
         container[size++] = value;
         modCount++;
     }
+    public void grow() {
+        container = Arrays.copyOf(container, container.length * 2);
+    }
 
     @Override
     public T set(int index, T newValue) {
+        validation(index);
         T oldValue = container[index];
-        container[Objects.checkIndex(index, size)] = newValue;
-        modCount++;
+        container[index] = newValue;
         return oldValue;
     }
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, size);
+        validation(index);
         T oldValue = container[index];
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         modCount++;
-        size--;
-        container[container.length - 1] = null;
+        container[size--] = null;
         return oldValue;
     }
 
     @Override
     public T get(int index) {
-        return container[Objects.checkIndex(index, size)];
+        validation(index);
+        return container[index];
     }
 
     @Override
@@ -56,11 +63,14 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private int point;
+           private int point;
            private int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return point < size;
             }
 
@@ -68,9 +78,6 @@ public class SimpleArrayList<T> implements List<T> {
             public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
                 }
                 return container[point++];
             }
