@@ -43,7 +43,7 @@ public class SimpleArrayList<T> implements List<T> {
         T oldValue = get(index);
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         modCount++;
-        container[size--] = null;
+        container[--size] = null;
         return oldValue;
     }
 
