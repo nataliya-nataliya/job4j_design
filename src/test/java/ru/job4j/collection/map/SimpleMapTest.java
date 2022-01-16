@@ -22,6 +22,17 @@ public class SimpleMapTest {
     }
 
     @Test
+    public void whenPutEqualKey() {
+        map.put("123", "abc");
+        assertFalse(map.put("123", "abc"));
+    }
+    @Test
+    public void whenPutNotEqualKey() {
+        map.put("123", "abc");
+        assertTrue(map.put("456", "abc"));
+    }
+
+    @Test
     public void whenGetValue() {
         map.put("123", "abc");
         assertThat(map.get("123"), is("abc"));
@@ -31,7 +42,7 @@ public class SimpleMapTest {
     public void whenGetValueAndAddedKeysAreEqual() {
         map.put("123", "abc");
         map.put("123", "efg");
-        assertThat(map.get("123"), is("efg"));
+        assertThat(map.get("123"), is("abc"));
     }
 
     @Test
