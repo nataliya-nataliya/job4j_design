@@ -23,7 +23,7 @@ public class Analysis {
     }
 
     public static void main(String[] args) {
-        Analysis analysis = new Analysis();
-        analysis.unavailable("./data/unavailable.csv", "./data/target.txt");
+        Analysis analysisAccess = new Analysis();
+        analysisAccess.unavailable("./data/unavailable.csv", "./data/target.txt");
     }
 }
