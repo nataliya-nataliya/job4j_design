@@ -36,7 +36,7 @@ public class AnalysisTest {
                 rsl.append(line);
             }
         }
-        assertThat(rsl.toString(), is("01:01:00;01:01:50" +
-                "01:02:03;01:03:10"));
+        assertThat(rsl.toString(), is("01:01:00;01:01:50"
+                + "01:02:03;01:03:10"));
     }
 }
