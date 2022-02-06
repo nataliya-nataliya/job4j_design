@@ -6,18 +6,30 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    private final HashMap<FileProperty, Path> map = new HashMap<>();
+    private final Map<FileProperty, List<Path>> map = new HashMap<>();
 
+    /**
+     * Проверка на размер ArrayList добавлена, чтобы вывести абсолютный путь первого файла,
+     * у которого найден дубликат
+     */
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fileProperty = new FileProperty(attrs.size(), file.getFileName().toString());
         if (map.containsKey(fileProperty)) {
-            System.out.println(map.get(fileProperty).toAbsolutePath());
+            if (map.get(fileProperty).size() == 1) {
+                System.out.println(map.get(fileProperty).get(0).toAbsolutePath());
+            }
+            map.get(fileProperty).add(file.toAbsolutePath());
+            System.out.println(file.toAbsolutePath());
         } else {
-            map.put(fileProperty, file);
+            map.put(fileProperty, new ArrayList<>());
+            map.get(fileProperty).add(file.toAbsolutePath());
         }
         return super.visitFile(file, attrs);
     }
