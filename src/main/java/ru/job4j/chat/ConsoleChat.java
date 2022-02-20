@@ -28,18 +28,19 @@ public class ConsoleChat {
             }
             boolean status = false;
             logList.add(in);
+            List<String> phrases = readPhrases();
+            int i = readPhrases().size() - 1;
             while (!OUT.equals(in.toLowerCase())) {
                 if (STOP.equals(in.toLowerCase())) {
                     status = true;
                 }
                 if (CONTINUE.equals(in.toLowerCase())) {
                     status = false;
-                    in = input.nextLine();
                 }
                 if (!status) {
-                    String a = readPhrases().get((int) (Math.random() * (readPhrases().size() - 1)));
-                    System.out.println(a);
-                    logList.add(a);
+                    String randomPhrase = phrases.get((int) (Math.random() * i));
+                    System.out.println(randomPhrase);
+                    logList.add(randomPhrase);
                 }
                 in = input.nextLine();
                 logList.add(in);
