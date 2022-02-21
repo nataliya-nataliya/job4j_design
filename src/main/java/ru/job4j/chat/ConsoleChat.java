@@ -29,7 +29,7 @@ public class ConsoleChat {
             boolean status = false;
             logList.add(in);
             List<String> phrases = readPhrases();
-            int i = readPhrases().size() - 1;
+            int i = phrases.size() - 1;
             while (!OUT.equals(in.toLowerCase())) {
                 if (STOP.equals(in.toLowerCase())) {
                     status = true;
