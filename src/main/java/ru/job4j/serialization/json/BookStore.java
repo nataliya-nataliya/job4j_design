@@ -8,8 +8,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 
 @XmlRootElement(name = "bookStore")
-@XmlAccessorType
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BookStore {
     @XmlAttribute
     private boolean stock;
