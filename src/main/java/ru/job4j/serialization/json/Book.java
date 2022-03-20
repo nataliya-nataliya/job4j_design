@@ -1,8 +1,20 @@
 package ru.job4j.serialization.json;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "book")
 public class Book {
-    private final String author;
-    private final String nameBook;
+
+    @XmlAttribute
+    private String author;
+
+    @XmlAttribute
+    private String nameBook;
+
+    public Book() {
+
+    }
 
     public Book(String author, String nameBook) {
         this.author = author;
