@@ -21,6 +21,14 @@ public class Book {
         this.nameBook = nameBook;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getNameBook() {
+        return nameBook;
+    }
+
     @Override
     public String toString() {
         return "Book{"

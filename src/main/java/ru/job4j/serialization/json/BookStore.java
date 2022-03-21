@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 @XmlRootElement(name = "bookStore")
 @XmlAccessorType(XmlAccessType.FIELD)
+
 public class BookStore {
     @XmlAttribute
     private boolean stock;
@@ -36,6 +37,26 @@ public class BookStore {
         this.publishingHouse = publishingHouse;
         this.book = book;
         this.genres = genres;
+    }
+
+    public boolean isStock() {
+        return stock;
+    }
+
+    public int getIdBook() {
+        return idBook;
+    }
+
+    public String getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public String[] getGenres() {
+        return genres;
     }
 
     @Override
