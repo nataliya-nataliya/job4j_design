@@ -12,10 +12,10 @@ public class ConnectionDemo {
         Config config = new Config("./app.properties");
         config.load();
         String driver = config.value("hibernate.connection.driver_class");
+        Class.forName(driver);
         String url = config.value("hibernate.connection.url");
         String login = config.value("hibernate.connection.username");
         String password = config.value("hibernate.connection.password");
-        Class.forName(driver);
 
         try (Connection connection = DriverManager.getConnection(url, login, password)) {
             DatabaseMetaData metaData = connection.getMetaData();
