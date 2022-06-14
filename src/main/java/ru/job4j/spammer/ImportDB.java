@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ImportDB {
 
@@ -21,10 +22,21 @@ public class ImportDB {
 
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
+        AtomicInteger count = new AtomicInteger();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach((s) -> {
+                count.getAndIncrement();
                 String[] nameEmail = s.trim().split(";");
-                users.add(new User(nameEmail[0], nameEmail[1]));
+                if (nameEmail.length == 2
+                        && !nameEmail[0].isBlank() && !nameEmail[1].isBlank()) {
+                    users.add(new User(nameEmail[0], nameEmail[1]));
+                } else if (nameEmail.length == 1) {
+                    throw  new IllegalArgumentException("В строке " + count + " нет e-mail");
+                } else if (nameEmail.length == 2) {
+                    throw  new IllegalArgumentException("В строке " + count + " нет имени");
+                } else {
+                    throw  new IllegalArgumentException("В строке " + count + " нет данных");
+                }
             });
         }
         return users;
