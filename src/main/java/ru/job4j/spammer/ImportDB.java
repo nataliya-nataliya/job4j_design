@@ -30,12 +30,9 @@ public class ImportDB {
                 if (nameEmail.length == 2
                         && !nameEmail[0].isBlank() && !nameEmail[1].isBlank()) {
                     users.add(new User(nameEmail[0], nameEmail[1]));
-                } else if (nameEmail.length == 1) {
-                    throw  new IllegalArgumentException("В строке " + count + " нет e-mail");
-                } else if (nameEmail.length == 2) {
-                    throw  new IllegalArgumentException("В строке " + count + " нет имени");
-                } else {
-                    throw  new IllegalArgumentException("В строке " + count + " нет данных");
+                }
+                if (nameEmail.length == 0 || nameEmail.length == 1 || nameEmail.length == 2) {
+                    throw  new IllegalArgumentException("В строке " + count + " нет имени, e-mail  или ни того, ни другого");
                 }
             });
         }
