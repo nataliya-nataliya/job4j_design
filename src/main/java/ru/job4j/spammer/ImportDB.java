@@ -27,13 +27,11 @@ public class ImportDB {
             rd.lines().forEach((s) -> {
                 count.getAndIncrement();
                 String[] nameEmail = s.trim().split(";");
-                if (nameEmail.length == 2
-                        && !nameEmail[0].isBlank() && !nameEmail[1].isBlank()) {
-                    users.add(new User(nameEmail[0], nameEmail[1]));
-                }
-                if (nameEmail.length == 0 || nameEmail.length == 1 || nameEmail.length == 2) {
+                if (nameEmail.length != 2
+                        || nameEmail[0].isBlank() || nameEmail[1].isBlank()) {
                     throw  new IllegalArgumentException("В строке " + count + " нет имени, e-mail  или ни того, ни другого");
                 }
+                users.add(new User(nameEmail[0], nameEmail[1]));
             });
         }
         return users;
