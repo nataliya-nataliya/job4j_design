@@ -56,7 +56,6 @@ public class Menu {
             } else if (showAllPosts == userChoice) {
                 System.out.println(PostStore.getPosts());
             } else if (deletePost == userChoice) {
-                //System.out.println(ID_FOR_DELETE);
                 postStore.removeAll();
             } else {
                 run = false;

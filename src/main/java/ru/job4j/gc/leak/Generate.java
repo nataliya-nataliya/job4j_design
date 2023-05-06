@@ -10,13 +10,6 @@ import java.util.stream.Stream;
 public interface Generate {
     void generate();
 
-//    default List<String> read(String path) throws IOException {
-//        List<String> text = new ArrayList<>();
-//        Files.lines(Paths.get(path))
-//                .forEach(text::add);
-//        return text;
-//    }
-
     default List<String> read(String path) throws IOException {
         List<String> text = new ArrayList<>();
         try (Stream<String> lines = Files.lines(Paths.get(path))) {
