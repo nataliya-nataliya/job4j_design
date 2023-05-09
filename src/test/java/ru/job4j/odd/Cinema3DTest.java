@@ -1,8 +1,9 @@
-package ru.job4j.odd.tdd;
+package ru.job4j.odd;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import ru.job4j.odd.tdd.*;
 
 import java.util.Calendar;
 import java.util.List;
