@@ -5,13 +5,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 
-
-@Disabled("Тесты отключены. Удалить аннотацию после реализации всех методов по заданию.")
+@Disabled()
 public class Cinema3DTest {
     @Test
     public void whenBuyThenGetTicket() {
@@ -30,6 +27,7 @@ public class Cinema3DTest {
         List<Session> sessions = cinema.find(ses -> true);
         Assertions.assertTrue(sessions.contains(session));
     }
+
     @Test
     public void whenDoesNotAddSessionThenItDoesNotExistBetweenAllSessions() {
         Cinema cinema = new Cinema3D();
@@ -46,6 +44,7 @@ public class Cinema3DTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> cinema.buy(account, -1, 1, date));
 
     }
+
     @Test
     public void whenBuyOnInvalidColumnThenGetException() {
         Account account = new AccountCinema();
@@ -54,6 +53,7 @@ public class Cinema3DTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> cinema.buy(account, 1, -1, date));
 
     }
+
     @Test
     public void whenBuyOnInvalidDateThenGetException() {
         Account account = new AccountCinema();
