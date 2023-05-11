@@ -8,7 +8,7 @@ public class ArgsName {
 
     public String get(String key) {
         if (values.get(key) == null) {
-            throw  new IllegalArgumentException("Не содержит ключ");
+            throw new IllegalArgumentException(String.format("There is no %s key", key));
         }
         return values.get(key);
     }
@@ -18,7 +18,7 @@ public class ArgsName {
             int i = s.indexOf("=");
             validation(s, i);
             String key = s.substring(1, i);
-            String value = s.substring(i + 1, s.length());
+            String value = s.substring(i + 1);
             if (key != null && value != null) {
                 values.put(key, value);
             }
@@ -27,7 +27,7 @@ public class ArgsName {
 
     public static void validation(String string, int index) {
         if (!string.startsWith("-") || string.length() - 1 == index) {
-            throw new IllegalArgumentException("Введите аргументы в виде -key=value");
+            throw new IllegalArgumentException("Enter arguments -key=value");
         }
     }
 
@@ -38,10 +38,10 @@ public class ArgsName {
     }
 
     public static void main(String[] args) {
-        ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512", "-encoding=UTF-8"});
+        ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512", "-encoding=UTF-8"});
         System.out.println(jvm.get("Xmx"));
 
-        ArgsName zip = ArgsName.of(new String[] {"-out=project.zip", "-encoding=UTF-8"});
+        ArgsName zip = ArgsName.of(new String[]{"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
     }
 }
