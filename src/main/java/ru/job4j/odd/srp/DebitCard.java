@@ -1,4 +1,4 @@
-package ru.job4j.odd.srd;
+package ru.job4j.odd.srp;
 
 /*
  * Example of a violation of the Single Responsibility Principle

@@ -14,6 +14,12 @@ import java.util.Scanner;
 public class CSVReader {
     public final String delimiterColumnsArg = ",";
     public static final int NUMBER_OF_PARAMETERS = 4;
+    public static final String PATH_KEY_ARG = "path";
+    public static final String OUT_KEY_ARG = "out";
+    public static final String FILTER_KEY_ARG = "filter";
+    public static final String STDOUT_VALUE_ARG = "stdout";
+    public static final String DELIMITER_KEY_ARG = "delimiter";
+    public static final String FILE_EXTENSION = ".csv";
 
     public List<String> getRowsFromFile(String path, String delimiter) {
         List<String> list = new ArrayList<>();
@@ -29,8 +35,13 @@ public class CSVReader {
     }
 
     public List<Integer> getIndexesColumns(List<String> list, String filter, String delimiter) {
+        String namesOfColumns = list.get(0);
+        if (!namesOfColumns.contains(delimiter)) {
+            throw new IllegalArgumentException(
+                    String.format("The delimiter \"%s\" does not match the delimiter in the file", delimiter));
+        }
         String[] filterColumns = filter.split(delimiterColumnsArg);
-        List<String> columns = Arrays.asList(list.get(0).split(delimiter));
+        List<String> columns = Arrays.asList(namesOfColumns.split(delimiter));
         List<Integer> indexes = new ArrayList<>();
         for (String filterColumn : filterColumns) {
             int index = columns.indexOf(filterColumn);
@@ -70,20 +81,29 @@ public class CSVReader {
 
     public static void handle(ArgsName argsName) {
         CSVReader csvReader = new CSVReader();
-        String path = argsName.get("path");
-        if (!new File(path).exists()) {
-            throw new IllegalArgumentException(String.format("There is no path:%s", path));
+        String path = argsName.get(PATH_KEY_ARG);
+        File file = new File(path);
+        if (!file.exists()) {
+            throw new IllegalArgumentException(String.format("There is no path:%s", file));
+        } else if (!path.endsWith(FILE_EXTENSION)) {
+            throw new IllegalArgumentException(
+                    String.format("The file %s does not have the file extension %s",
+                            file.getName(), FILE_EXTENSION));
         }
-        String delimiter = argsName.get("delimiter");
-        String out = argsName.get("out");
-        String filter = argsName.get("filter");
+        String delimiter = argsName.get(DELIMITER_KEY_ARG);
+        String out = argsName.get(OUT_KEY_ARG);
+        String filter = argsName.get(FILTER_KEY_ARG);
         List<String> listRows = csvReader.getRowsFromFile(path, delimiter);
         List<Integer> listIndexesColumns = csvReader.getIndexesColumns(listRows, filter, delimiter);
         String columns = csvReader.getColumns(listRows, listIndexesColumns, delimiter);
-        if (out.equals("stdout")) {
+        if (out.equals(STDOUT_VALUE_ARG)) {
             csvReader.printList(columns);
-        } else {
+        } else if (out.endsWith(FILE_EXTENSION)) {
             csvReader.writeCSV(columns, out);
+        } else {
+            throw new IllegalArgumentException(String.format(
+                    "The value of the path parameter must be \"%s\" or a file with the file extension %s",
+                    STDOUT_VALUE_ARG, FILE_EXTENSION));
         }
     }
 

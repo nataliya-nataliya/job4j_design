@@ -1,4 +1,4 @@
-package ru.job4j.odd.srd;
+package ru.job4j.odd.srp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

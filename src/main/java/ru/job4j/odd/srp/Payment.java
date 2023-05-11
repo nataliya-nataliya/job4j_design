@@ -1,4 +1,4 @@
-package ru.job4j.odd.srd;
+package ru.job4j.odd.srp;
 
 public interface Payment {
     public void processPayment(double amount);
