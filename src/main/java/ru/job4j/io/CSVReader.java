@@ -96,7 +96,7 @@ public class CSVReader {
         List<String> listRows = csvReader.getRowsFromFile(path, delimiter);
         List<Integer> listIndexesColumns = csvReader.getIndexesColumns(listRows, filter, delimiter);
         String columns = csvReader.getColumns(listRows, listIndexesColumns, delimiter);
-        if (out.equals(STDOUT_VALUE_ARG)) {
+        if (STDOUT_VALUE_ARG.equals(out)) {
             csvReader.printList(columns);
         } else if (out.endsWith(FILE_EXTENSION)) {
             csvReader.writeCSV(columns, out);
