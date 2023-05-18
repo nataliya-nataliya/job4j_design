@@ -5,4 +5,10 @@ public class Car extends Vehicle {
         super(number);
         numberOfPlaces = 1;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" + "numberOfPlaces=" + numberOfPlaces
+                + ", numberOfVehicle='" + numberOfVehicle + '\'' + '}';
+    }
 }

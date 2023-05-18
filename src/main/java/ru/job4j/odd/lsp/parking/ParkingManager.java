@@ -2,10 +2,14 @@ package ru.job4j.odd.lsp.parking;
 
 import java.util.ArrayList;
 
-public interface ParkingManager {
-    void add(Vehicle vehicle);
+public interface ParkingManager<T extends Vehicle> {
+    void delete(T vehicle);
 
-    void delete(Vehicle vehicle);
+    ArrayList<T> getList();
 
-    ArrayList<Vehicle> getList();
+    boolean checkAdd(T vehicle);
+
+    long numberOfEmptyParkingSpaces();
+
+    void add(T vehicle);
 }
