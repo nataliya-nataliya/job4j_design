@@ -56,7 +56,7 @@ public class Menu {
                 System.out.printf("%s%s%s%n", insert.getClass().getSimpleName(), END, LocalTime.now());
             } else {
                 run = false;
-                System.out.println("Конец работы");
+                System.out.println("End");
             }
         }
     }
