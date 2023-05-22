@@ -9,13 +9,16 @@ public class Food {
     private LocalDate createDate;
     private double price;
     private double discount;
+    private final double originalPrice;
 
-    public Food(String name, LocalDate expiryDate, LocalDate createDate, double price, double discount) {
+    public Food(String name, LocalDate expiryDate, LocalDate createDate, double price, double discount,
+                double originalPrice) {
         this.name = name;
         this.expiryDate = expiryDate;
         this.createDate = createDate;
         this.price = price;
         this.discount = discount;
+        this.originalPrice = originalPrice;
     }
 
     public String getName() {
@@ -56,6 +59,10 @@ public class Food {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public double getOriginalPrice() {
+        return originalPrice;
     }
 
     @Override

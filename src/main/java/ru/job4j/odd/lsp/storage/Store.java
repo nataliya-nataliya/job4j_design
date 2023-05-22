@@ -13,4 +13,8 @@ public interface Store {
     boolean addCheck(Food product);
 
     double remainingShelfLifeCoefficient(Food product);
+
+    void clearStore();
+
+    int sizeOfStore();
 }

@@ -35,6 +35,16 @@ public class Warehouse extends AbstractStore {
     }
 
     @Override
+    public void clearStore() {
+        warehouseList.clear();
+    }
+
+    @Override
+    public int sizeOfStore() {
+        return warehouseList.size();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

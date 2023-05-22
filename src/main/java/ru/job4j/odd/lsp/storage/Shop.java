@@ -44,6 +44,22 @@ public class Shop extends AbstractStore {
     }
 
     @Override
+    public void clearStore() {
+        shopList.clear();
+    }
+
+    @Override
+    public int sizeOfStore() {
+        return shopList.size();
+    }
+
+    public void changePriceBackToOriginalPrice() {
+        for (Food product : shopList) {
+            product.setPrice(product.getOriginalPrice());
+        }
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

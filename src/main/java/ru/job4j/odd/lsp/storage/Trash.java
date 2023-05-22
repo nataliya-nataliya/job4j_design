@@ -39,6 +39,16 @@ public class Trash extends AbstractStore {
     }
 
     @Override
+    public void clearStore() {
+        trashList.clear();
+    }
+
+    @Override
+    public int sizeOfStore() {
+        return trashList.size();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
